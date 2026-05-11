@@ -1,10 +1,141 @@
-
+```html
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Malzeme Talep</title>
+
+<style>
+body{
+  font-family:Arial;
+  background:#2f3e3e;
+  color:white;
+  margin:0;
+  padding:20px;
+}
+
+h2{
+  text-align:center;
+}
+
+.box{
+  background:#445a5a;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:20px;
+}
+
+input, textarea{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border:none;
+  border-radius:8px;
+}
+
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:8px;
+  background:#d6cf72;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.item{
+  background:#3b5050;
+  padding:15px;
+  margin:10px 0;
+  border-radius:10px;
+}
+
+.delete{
+  background:#ff6b6b;
+  margin-top:10px;
+}
+</style>
 </head>
+
 <body>
-<h2>Malzeme Talep Sayfası</h2>
+
+<h2>📦 Malzeme Talep Sistemi</h2>
+
+<div class="box">
+  <input type="text" id="ad" placeholder="Ad Soyad">
+  <input type="text" id="malzeme" placeholder="Talep Edilen Malzeme">
+  <input type="number" id="adet" placeholder="Adet">
+  <textarea id="aciklama" placeholder="Açıklama"></textarea>
+  <button onclick="ekle()">Talep Oluştur</button>
+</div>
+
+<div id="liste"></div>
+
+<script>
+const key = "malzeme_talep_list";
+
+function yukle(){
+  let data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : [];
+}
+
+function kaydet(data){
+  localStorage.setItem(key, JSON.stringify(data));
+}
+
+function ekle(){
+  let ad = document.getElementById("ad").value;
+  let malzeme = document.getElementById("malzeme").value;
+  let adet = document.getElementById("adet").value;
+  let aciklama = document.getElementById("aciklama").value;
+
+  if(!ad || !malzeme){
+    alert("Boş alan bırakma");
+    return;
+  }
+
+  let liste = yukle();
+
+  liste.push({
+    ad,
+    malzeme,
+    adet,
+    aciklama,
+    tarih: new Date().toLocaleString()
+  });
+
+  kaydet(liste);
+  goster();
+}
+
+function sil(index){
+  let liste = yukle();
+  liste.splice(index,1);
+  kaydet(liste);
+  goster();
+}
+
+function goster(){
+  let liste = yukle();
+  let alan = document.getElementById("liste");
+  alan.innerHTML = "";
+
+  liste.forEach((item,i)=>{
+    alan.innerHTML += `
+      <div class="item">
+        <b>${item.ad}</b><br>
+        ${item.malzeme} (${item.adet})<br>
+        ${item.aciklama}<br>
+        <small>${item.tarih}</small><br>
+        <button class="delete" onclick="sil(${i})">Sil</button>
+      </div>
+    `;
+  });
+}
+
+goster();
+</script>
+
 </body>
 </html>
+```
