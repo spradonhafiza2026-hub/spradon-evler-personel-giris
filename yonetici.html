@@ -1,1 +1,62 @@
 
+```html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Yönetici Paneli</title>
+
+<style>
+body{font-family:Arial;background:#2f3e3e;color:white;padding:20px}
+.item{background:#445a5a;padding:10px;margin:10px 0;border-radius:8px}
+button{margin-top:5px;margin-right:5px;padding:5px 10px;border:none;border-radius:5px;cursor:pointer}
+.ok{background:green;color:white}
+.no{background:red;color:white}
+</style>
+</head>
+
+<body>
+
+<h2>🧑‍💼 Yönetici Onay Paneli</h2>
+
+<div id="liste"></div>
+
+<script>
+const key="talep_list";
+
+function get(){return JSON.parse(localStorage.getItem(key)||"[]")}
+function set(d){localStorage.setItem(key,JSON.stringify(d))}
+
+function onayla(i){
+let d=get();
+d[i].durum="onaylandı";
+set(d);
+goster();
+}
+
+function reddet(i){
+let d=get();
+d[i].durum="reddedildi";
+set(d);
+goster();
+}
+
+function goster(){
+let d=get();
+liste.innerHTML="";
+d.forEach((x,i)=>{
+liste.innerHTML+=`
+<div class="item">
+<b>${x.ad}</b><br>
+${x.malzeme} (${x.adet})<br>
+<button class="ok" onclick="onayla(${i})">Onayla</button>
+<button class="no" onclick="reddet(${i})">Reddet</button>
+</div>`;
+});
+}
+goster();
+</script>
+
+</body>
+</html>
+```
