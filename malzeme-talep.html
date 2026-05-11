@@ -7,132 +7,68 @@
 <title>Malzeme Talep</title>
 
 <style>
-body{
-  font-family:Arial;
-  background:#2f3e3e;
-  color:white;
-  margin:0;
-  padding:20px;
-}
-
-h2{
-  text-align:center;
-}
-
-.box{
-  background:#445a5a;
-  padding:20px;
-  border-radius:12px;
-  margin-bottom:20px;
-}
-
-input, textarea{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border:none;
-  border-radius:8px;
-}
-
-button{
-  padding:10px 15px;
-  border:none;
-  border-radius:8px;
-  background:#d6cf72;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-.item{
-  background:#3b5050;
-  padding:15px;
-  margin:10px 0;
-  border-radius:10px;
-}
-
-.delete{
-  background:#ff6b6b;
-  margin-top:10px;
-}
+body{font-family:Arial;background:#2f3e3e;color:white;padding:20px}
+.box{background:#445a5a;padding:15px;border-radius:10px;margin-bottom:15px}
+input,textarea{width:100%;padding:8px;margin:5px 0;border-radius:6px;border:none}
+button{padding:8px 12px;border:none;border-radius:6px;background:#d6cf72;font-weight:bold;cursor:pointer}
+.item{background:#3b5050;padding:10px;margin:10px 0;border-radius:8px}
+.durum{font-size:12px;margin-top:5px}
+.bekle{color:orange}
+.onay{color:lightgreen}
+.red{color:#ff6b6b}
 </style>
 </head>
 
 <body>
 
-<h2>📦 Malzeme Talep Sistemi</h2>
+<h2>📦 Malzeme Talep</h2>
 
 <div class="box">
-  <input type="text" id="ad" placeholder="Ad Soyad">
-  <input type="text" id="malzeme" placeholder="Talep Edilen Malzeme">
-  <input type="number" id="adet" placeholder="Adet">
-  <textarea id="aciklama" placeholder="Açıklama"></textarea>
-  <button onclick="ekle()">Talep Oluştur</button>
+<input id="ad" placeholder="Ad Soyad">
+<input id="malzeme" placeholder="Malzeme">
+<input id="adet" type="number" placeholder="Adet">
+<textarea id="aciklama" placeholder="Açıklama"></textarea>
+<button onclick="ekle()">Talep Oluştur</button>
 </div>
 
 <div id="liste"></div>
 
 <script>
-const key = "malzeme_talep_list";
+const key="talep_list";
 
-function yukle(){
-  let data = localStorage.getItem(key);
-  return data ? JSON.parse(data) : [];
-}
-
-function kaydet(data){
-  localStorage.setItem(key, JSON.stringify(data));
-}
+function get(){return JSON.parse(localStorage.getItem(key)||"[]")}
+function set(data){localStorage.setItem(key,JSON.stringify(data))}
 
 function ekle(){
-  let ad = document.getElementById("ad").value;
-  let malzeme = document.getElementById("malzeme").value;
-  let adet = document.getElementById("adet").value;
-  let aciklama = document.getElementById("aciklama").value;
-
-  if(!ad || !malzeme){
-    alert("Boş alan bırakma");
-    return;
-  }
-
-  let liste = yukle();
-
-  liste.push({
-    ad,
-    malzeme,
-    adet,
-    aciklama,
-    tarih: new Date().toLocaleString()
-  });
-
-  kaydet(liste);
-  goster();
-}
-
-function sil(index){
-  let liste = yukle();
-  liste.splice(index,1);
-  kaydet(liste);
-  goster();
+let data=get();
+data.push({
+ad:ad.value,
+malzeme:malzeme.value,
+adet:adet.value,
+aciklama:aciklama.value,
+tarih:new Date().toLocaleString(),
+durum:"bekliyor"
+});
+set(data);
+goster();
 }
 
 function goster(){
-  let liste = yukle();
-  let alan = document.getElementById("liste");
-  alan.innerHTML = "";
-
-  liste.forEach((item,i)=>{
-    alan.innerHTML += `
-      <div class="item">
-        <b>${item.ad}</b><br>
-        ${item.malzeme} (${item.adet})<br>
-        ${item.aciklama}<br>
-        <small>${item.tarih}</small><br>
-        <button class="delete" onclick="sil(${i})">Sil</button>
-      </div>
-    `;
-  });
+let data=get();
+liste.innerHTML="";
+data.forEach(x=>{
+liste.innerHTML+=`
+<div class="item">
+<b>${x.ad}</b><br>
+${x.malzeme} (${x.adet})<br>
+${x.aciklama}<br>
+<small>${x.tarih}</small>
+<div class="durum ${x.durum}">
+Durum: ${x.durum}
+</div>
+</div>`;
+});
 }
-
 goster();
 </script>
 
