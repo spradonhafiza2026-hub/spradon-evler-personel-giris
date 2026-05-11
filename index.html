@@ -1,99 +1,60 @@
-<!doctype html>
-<html lang="tr" translate="no" class="notranslate">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="google" content="notranslate" />
-  <title>Spradon Hafıza • Merkez Panel (Demo)</title>
-  <style>
-    :root{
-      --bg:#0b1220; --card:#0f1b33; --muted:#93a4c7; --text:#e9f0ff;
-      --btn:#2563eb; --btn2:rgba(255,255,255,.08); --line:rgba(147,164,199,.18);
-    }
-    body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:linear-gradient(180deg,#071023,#0b1220);color:var(--text);padding:16px}
-    .wrap{max-width:760px;margin:0 auto}
-    .top{display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:14px}
-    .title{font-size:18px;font-weight:800}
-    .sub{color:var(--muted);font-size:13px}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-    @media (min-width:840px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));}}
-    .card{background:rgba(15,27,51,.92);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-    .h{font-weight:800;margin:0 0 6px 0}
-    .p{color:var(--muted);font-size:13px;margin:0 0 10px 0;line-height:1.35}
-    a.btn{display:block;text-decoration:none;text-align:center;border-radius:12px;padding:12px 10px;font-weight:800}
-    a.btn.primary{background:var(--btn);color:#fff}
-    a.btn.secondary{background:var(--btn2);border:1px solid var(--line);color:var(--text)}
-    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
-    .pill{display:inline-block;padding:2px 8px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid var(--line);font-size:12px;color:var(--muted)}
-    .note{margin-top:14px;background:rgba(255,255,255,.04);border:1px dashed var(--line);border-radius:16px;padding:12px;color:var(--muted);font-size:13px;line-height:1.4}
-    code{color:#cfe3ff}
-  </style>
+<meta charset="UTF-8">
+<title>Spradon Sistem Giriş</title>
+
+<style>
+body {
+  font-family: Arial;
+  background:#f4f6f8;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+.box {
+  background:white;
+  padding:30px;
+  border-radius:10px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+  text-align:center;
+}
+input {
+  padding:10px;
+  width:200px;
+  margin:10px 0;
+}
+button {
+  padding:10px 20px;
+  background:#1F2A44;
+  color:white;
+  border:none;
+  border-radius:5px;
+}
+</style>
 </head>
-<body translate="no" class="notranslate">
-  <div class="wrap">
-    <div class="top">
-      <div>
-        <div class="title">Spradon Hafıza • Merkez Panel (Demo)</div>
-        <div class="sub">Tek ekrandan tüm modüller • Bugün hedef: Panel + Tespit/İş Takip tamam</div>
-      </div>
-      <div class="row">
-        <span class="pill">Demo</span>
-        <span class="pill">Rol Bazlı</span>
-        <span class="pill">Rapor</span>
-      </div>
-    </div>
 
-    <div class="grid">
-      <div class="card">
-        <div class="h">1) Personel Paneli</div>
-        <div class="p">İsim/ID yönetimi, giriş-çıkış temel yapısı (demo).</div>
-        <a class="btn primary" href="./panel.html">Aç</a>
-        <a class="btn secondary" href="./users.html">Kullanıcı Listesi (varsa)</a>
-      </div>
+<body>
 
-      <div class="card">
-        <div class="h">2) Tespit / İş Takip Panosu</div>
-        <div class="p">Herkes tespit girsin, teknik/temizlik “durum” güncellesin.</div>
-        <a class="btn primary" href="./tespit.html">Aç</a>
-        <a class="btn secondary" href="./is-takip.html">İş Takip (varsa)</a>
-      </div>
+<div class="box">
+  <h2>Spradon Operasyon</h2>
+  <input type="password" id="sifre" placeholder="Şifre">
+  <br>
+  <button onclick="giris()">Giriş</button>
+</div>
 
-      <div class="card">
-        <div class="h">3) Güvenlik Fotoğraflı Bildirim</div>
-        <div class="p">Şu an “offline/PWA” eksik: not aldık, geri döneceğiz.</div>
-        <a class="btn primary" href="./guvenlik.html">Aç</a>
-        <a class="btn secondary" href="./security.html">Alternatif Dosya (varsa)</a>
-      </div>
+<script>
+function giris() {
+  let s = document.getElementById("sifre").value;
 
-      <div class="card">
-        <div class="h">4) Stok / Depo</div>
-        <div class="p">Ürün kartı + çıkış/teslim. Depo internet çekmeyebilir → PWA ile çözeceğiz.</div>
-        <a class="btn primary" href="./stok.html">Aç</a>
-        <a class="btn secondary" href="./stok-urun.html">Ürün Kartları (varsa)</a>
-      </div>
+  if (s === "spr2026") {
+    window.location.href = "panel.html";
+  } else {
+    alert("Hatalı şifre");
+  }
+}
+</script>
 
-      <div class="card">
-        <div class="h">5) Malzeme Talep</div>
-        <div class="p">Teknik/Temizlik talep açsın, muhasebe görsün, müdür takip etsin.</div>
-        <a class="btn primary" href="./malzeme.html">Aç</a>
-        <a class="btn secondary" href="./satinalma.html">Satın Alma (varsa)</a>
-      </div>
-
-      <div class="card">
-        <div class="h">6) Yönetici Görünümü</div>
-        <div class="p">Günlük 00:05 rapor + 17:00 özet + uyarılar (plan).</div>
-        <a class="btn primary" href="./yonetici.html">Aç</a>
-        <a class="btn secondary" href="./rapor.html">Raporlar (varsa)</a>
-      </div>
-    </div>
-
-    <div class="note">
-      <b>Not (Bugün çözmediğimiz konu):</b> “İnternet kapalıyken sayfanın açılmaması” normal.
-      Bunun çözümü <code>PWA + Service Worker Cache</code>. Yani “offline kayıt” için 3 dosya ekleyeceğiz:
-      <code>manifest.json</code>, <code>sw.js</code>, ve sayfalara küçük bir kayıt satırı.
-      <br><br>
-      Şimdi moral bozmadan: <b>Tespit/İş Takip Panosu</b> ve <b>Yönetici ekranı</b>nı bitiriyoruz.
-    </div>
-  </div>
 </body>
 </html>
