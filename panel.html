@@ -7,63 +7,89 @@
 <title>Spradon Operasyon Paneli</title>
 
 <style>
+:root{
+  --bg:#f4f7fb;
+  --card:#ffffff;
+  --text:#1f2a44;
+  --muted:#6b778c;
+  --primary:#2f6df6;
+  --primarySoft:rgba(47,109,246,.12);
+  --line:#e6eaf2;
+}
+
+*{box-sizing:border-box}
+
 body{
   margin:0;
   font-family:Arial, sans-serif;
-  background:#2f3e3e;
-  color:white;
+  background:var(--bg);
+  color:var(--text);
 }
 
 .header{
-  background:#445a5a;
-  padding:20px;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  padding:18px;
   text-align:center;
-  font-size:24px;
-  font-weight:bold;
+  font-size:22px;
+  font-weight:700;
 }
 
 .container{
-  padding:20px;
+  padding:24px;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:20px;
+  max-width:1100px;
+  margin:auto;
 }
 
 .card{
-  background:#445a5a;
+  background:var(--card);
   padding:25px;
-  border-radius:15px;
+  border-radius:16px;
   cursor:pointer;
   transition:0.2s;
   text-align:center;
-  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  border:1px solid var(--line);
 }
 
 .card:hover{
-  transform:translateY(-4px);
-  background:#506868;
+  transform:translateY(-5px);
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
 }
 
 .icon{
-  font-size:40px;
+  font-size:42px;
   margin-bottom:10px;
+  color:var(--primary);
 }
 
 .title{
-  font-size:20px;
-  font-weight:bold;
+  font-size:18px;
+  font-weight:700;
 }
 
 .desc{
   margin-top:8px;
-  color:#ddd;
+  color:var(--muted);
   font-size:14px;
+}
+
+.badge{
+  display:inline-block;
+  margin-top:10px;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:12px;
+  background:var(--primarySoft);
+  color:var(--primary);
 }
 
 .footer{
   text-align:center;
   padding:20px;
-  color:#ccc;
+  color:var(--muted);
   font-size:13px;
 }
 </style>
@@ -81,24 +107,28 @@ body{
     <div class="icon">🔐</div>
     <div class="title">Güvenlik</div>
     <div class="desc">Güvenlik bildirimi ve kayıtları</div>
+    <div class="badge">Aktif</div>
   </div>
 
   <div class="card" onclick="goPage('tespit.html')">
     <div class="icon">📋</div>
     <div class="title">Tespit</div>
     <div class="desc">Saha tespit ve kontrol sistemi</div>
+    <div class="badge">Aktif</div>
   </div>
 
   <div class="card" onclick="goPage('malzeme-talep.html')">
     <div class="icon">📦</div>
     <div class="title">Malzeme Talep</div>
     <div class="desc">Talep oluştur ve takip et</div>
+    <div class="badge">Yeni</div>
   </div>
 
   <div class="card" onclick="goPage('yonetici.html')">
     <div class="icon">🧑‍💼</div>
     <div class="title">Yönetici Paneli</div>
     <div class="desc">Onay / Red işlemleri</div>
+    <div class="badge">Yetkili</div>
   </div>
 
 </div>
