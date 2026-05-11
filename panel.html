@@ -1,41 +1,124 @@
-          typeof x.unit==="string")
-          .map(x=>({
-            id:x.id,
-            name:x.name,
-            unit:x.unit
-          }));
+```html
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spradon Operasyon Paneli</title>
 
-        people = cleaned;
-        saveList(people);
-        render();
-        alert("İçe aktarma başarılı.");
-      }catch(err){
-        alert("Geçersiz JSON dosyası.");
-      }finally{
-        importFile.value = "";
-      }
-    });
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#2f3e3e;
+  color:white;
+}
 
-    document.getElementById("clearBtn").addEventListener("click", ()=>{
-      if(confirm("Tüm personel listesini silmek istiyor musun?")){
-        people = [];
-        saveList(people);
-        render();
-      }
-    });
+.header{
+  background:#445a5a;
+  padding:20px;
+  text-align:center;
+  font-size:24px;
+  font-weight:bold;
+}
 
-    // Hover ayarı
-    document.getElementById("softHoverBtn").addEventListener("click", ()=>{
-      setHoverMode("soft");
-    });
+.container{
+  padding:20px;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:20px;
+}
 
-    document.getElementById("strongHoverBtn").addEventListener("click", ()=>{
-      setHoverMode("strong");
-    });
+.card{
+  background:#445a5a;
+  padding:25px;
+  border-radius:15px;
+  cursor:pointer;
+  transition:0.2s;
+  text-align:center;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+}
 
-    // ====== INIT ======
-    initHoverMode();
-    render();
-  </script>
+.card:hover{
+  transform:translateY(-4px);
+  background:#506868;
+}
+
+.icon{
+  font-size:40px;
+  margin-bottom:10px;
+}
+
+.title{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.desc{
+  margin-top:8px;
+  color:#ddd;
+  font-size:14px;
+}
+
+.footer{
+  text-align:center;
+  padding:20px;
+  color:#ccc;
+  font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  Spradon Evleri | Operasyon Paneli
+</div>
+
+<div class="container">
+
+  <div class="card" onclick="goPage('security.html')">
+    <div class="icon">🔐</div>
+    <div class="title">Güvenlik</div>
+    <div class="desc">Güvenlik bildirimi ve kayıtları</div>
+  </div>
+
+  <div class="card" onclick="goPage('tespit.html')">
+    <div class="icon">📋</div>
+    <div class="title">Tespit</div>
+    <div class="desc">Saha tespit ve kontrol sistemi</div>
+  </div>
+
+  <div class="card" onclick="goPage('stok.html')">
+    <div class="icon">📦</div>
+    <div class="title">Stok Yönetimi</div>
+    <div class="desc">Stok giriş çıkış sistemi</div>
+  </div>
+
+  <div class="card" onclick="goPage('is-takip.html')">
+    <div class="icon">🛠️</div>
+    <div class="title">İş Takip</div>
+    <div class="desc">Görev ve operasyon takibi</div>
+  </div>
+
+  <div class="card" onclick="goPage('peyzaj.html')">
+    <div class="icon">🌿</div>
+    <div class="title">Peyzaj</div>
+    <div class="desc">Peyzaj operasyon kayıtları</div>
+  </div>
+
+</div>
+
+<div class="footer">
+  Spradon Operasyon Sistemi © 2026
+</div>
+
+<script>
+function goPage(page){
+  window.location.href = page;
+}
+</script>
+
 </body>
 </html>
+```
